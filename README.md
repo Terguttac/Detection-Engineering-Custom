@@ -23,7 +23,6 @@ Retrieved detections are placed in the *validated* directory, prepended with `BK
 # Setup & Usage
 - Set environment variables for `ELASTIC_URL` and `API_KEY`.
 - Set an environment variable for `GH_URL` to the path of the github repo. For example: `https://raw.githubusercontent.com/Terguttac/Detection-Engineering-Custom/main/` 
-- Enable `getBKUP`. *(optional - see above)*
 - Run `monitor_detections.sh`.
 
 ---
