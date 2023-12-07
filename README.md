@@ -13,21 +13,17 @@ This repo builds upon the scripts written throughout Anthony Isherwood's [Detect
 - If a detection is altered **and** validated, it is synced to Elastic.
 
 ---
-If validation fails, the script can retrieve the last valid detection. This option is disabled by default but can be enabled by: 
-- Setting `getBKUP = True` in the `custom_validation.py` script.
-- Setting a `GH_URL` environment variable. 
+If validation fails, the script can retrieve the last valid detection. This option is enabled by default but can be disabled by setting `getBKUP = False` in the `custom_validation.py` script.
 
 Retrieved detections are placed in the *validated* directory, prepended with `BKUP_`, and are automatically removed when the failed detection is corrected.
 
 ---
 
 
-# Usage
+# Setup & Usage
 - Set environment variables for `ELASTIC_URL` and `API_KEY`.
-- Set `github_url` in `custom_toml_to_md.py` to the path of the github repo.
+- Set an environment variable for `GH_URL` to the path of the github repo. For example: `https://raw.githubusercontent.com/Terguttac/Detection-Engineering-Custom/main/` 
 - Enable `getBKUP`. *(optional - see above)*
-- Run `monitor_detections.sh`.
-- Run `monitor_detections.sh`.
 - Run `monitor_detections.sh`.
 
 ---
