@@ -1,0 +1,41 @@
+[metadata]
+creation_date = "2023/11/15"
+
+[rule]
+author = ["Terguttac"]
+description = "The alert looks for ps1 files added to the Run key in the registry."
+from = "now-6m" # This is the default value. Change as needed.
+name = "Suspicious file added to Registry run key (ps1)"
+risk_score = 85
+severity = "high"
+rule_id = "00000000-0000-0000-000000000002"
+type = "query"
+
+query = '''
+event.dataset: "windows.sysmon_operational" and event.action: "RegistryEvent (Value Set)" and registry.key: *CurrentVersion\\\\Run* and registry.data.strings : *.ps1
+'''
+
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1547"
+name = "Boot or Logon Autostart Execution"
+reference = "https://attack.mitre.org/techniques/T1547/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1547.001"
+name = "Registry Run Keys / Startup Folder"
+reference = "https://attack.mitre.org/techniques/T1547/001/"
+
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003"
+
+# Optional Fields
+# throttle: 7d
+# version: 1
+# interval: 5m

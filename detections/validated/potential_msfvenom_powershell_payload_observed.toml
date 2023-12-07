@@ -1,0 +1,36 @@
+[metadata]
+creation_date = "2023/11/15"
+
+[rule]
+author = ["Terguttac"]
+description = "Powershell execution indicative of MSFVenom payload observed in sysmon logs."
+from = "now-6m" # This is the default value. Change as needed.
+name = "Potential MSFVenom PowerShell Payload Observed"
+risk_score = 85
+severity = "high"
+rule_id = "00000000-0000-0000-000000000006"
+type = "query"
+
+query = '''
+event.dataset: "windows.sysmon_operational" and process.parent.name: "cmd.exe"  and message: "*powershell  -w hidden -nop -c $a='*"
+'''
+
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1059"
+name = "Command and Scripting Interpreter"
+reference = "https://attack.mitre.org/techniques/T1059/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1059.001"
+name = "PowerShell"
+reference = "https://attack.mitre.org/techniques/T1059/001/"
+
+
+[rule.threat.tactic]
+id = "TA0002"
+name = "Execution"
+reference = "https://attack.mitre.org/tactics/TA0002/"

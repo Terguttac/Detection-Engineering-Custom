@@ -1,0 +1,33 @@
+[metadata]
+creation_date = "2023/11/14"
+
+[rule]
+author = ["Terguttac"]
+description = "Triggers when more than 1000 queries to a webserver have been observed within 5 minutes."
+from = "now-6m" # This is the default value. Change as needed.
+name = "Excessive Web Traffic"
+risk_score = 25
+severity = "low"
+rule_id = "00000000-0000-0000-000000000005"
+type = "threshold"
+
+query = '''
+event.dataset: "zeek.http"
+'''
+
+[rule.threshold]
+field = ["source.ip"]
+value = 1000
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1046"
+name = "Network Service Discovery"
+reference = "https://attack.mitre.org/techniques/T1046/"
+
+[rule.threat.tactic]
+id = "TA0007"
+name = "Discovery"
+reference = "https://attack.mitre.org/tactics/TA0007/"

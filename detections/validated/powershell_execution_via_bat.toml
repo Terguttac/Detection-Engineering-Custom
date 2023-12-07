@@ -1,0 +1,36 @@
+[metadata]
+creation_date = "2023/11/15"
+
+[rule]
+author = ["Terguttac"]
+description = "Sysmon_operational logs indicate powershell execution originating from a bat file."
+from = "now-6m" # This is the default value. Change as needed.
+name = "Powershell execution via a bat file"
+risk_score = 55
+severity = "medium"
+rule_id = "00000000-0000-0000-000000000007"
+type = "query"
+
+query = '''
+event.dataset:"windows.sysmon_operational" and process.command_line : powershell* and process.parent.command_line : *bat*
+'''
+
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1059"
+name = "Command and Scripting Interpreter"
+reference = "https://attack.mitre.org/techniques/T1059/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1059.001"
+name = "PowerShell"
+reference = "Link to Mitre Doc here - https://attack.mitre.org/techniques/T1059/001/"
+
+
+[rule.threat.tactic]
+id = "TA0002"
+name = "Execution"
+reference = "https://attack.mitre.org/tactics/TA0002/"
